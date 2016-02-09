@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-md-6 col-md-offset-3">
+      <a href="/logout" class="btn btn-default pull-right" style="margin: 35px 20px 0 0 ;">Logout</a>
+      <a href="/bright_ideas" class="btn btn-default pull-right" style="margin: 35px 5px 0 0 ;">Back to Ideas</a>
+      <h3 class="well">Post Information</h3>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 0px;">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+
+        <div class="panel-heading"><a href="/users/<%= @post_info.user.id %>"><%= @post_info.user.first_name %></a> says:</div>
+        <div class="panel-body"><%= @post_info.text %></div>
+      </div>
+      <% if @liked_by.size > 0 %>
+      <h5>People who liked this post:</h5>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Alias</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @liked_by.each do |person| %>
+          <tr>
+            <td><a href="/users/<%= person.user.id %>"><%= person.user.alias%></a></td>
+            <td><%= person.user.first_name + " " + person.user.last_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>

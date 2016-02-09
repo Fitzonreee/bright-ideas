@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Hello, <%= @user.first_name %>!</h1>
+      <a href="/logout" class="btn btn-default pull-right" style="margin: 25px 20px 0 0 ;">Logout</a>
+      <h3 class="well">All the Bright Ideas</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form action="/add" method="post">
+        <div class="form-group">
+          <label for="idea">Add an idea:</label>
+          <textarea class="form-control" rows="5" id="idea" style="resize:none;" name="idea" placeholder="Post something witty here..."></textarea>
+        </div>
+        <input class="btn btn-xs btn-success pull-right" type="submit" name="name" value="Post Idea" style="margin-bottom:30px;">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <% @ideas.each do |post| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form action="/like/<%= post.id %>" method="post" style="display:inline;">
+                <input class="btn btn-xs btn-success" type="submit" name="name" value="Like">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              </form>
+              <% if post.user_id == session[:current_user_id] %>
+                <form action="/delete/<%= post.id %>" method="post" style="display:inline;">
+                  <input class="btn btn-xs btn-danger" type="submit" name="name" value="Delete">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                </form>
+              <% end %>
+              <span class="pull-right" style="font-weight:400;"><a href="/bright_ideas/<%= post.id %>"><%= post.likes.count %> people</a> like this</span>
+          </div>
+            <div class="panel-body">
+              <p><a href="/users/<%= post.user_id %>"><%= post.user.first_name %></a> says:</p>
+              <p><%= post.text %></p>
+            </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

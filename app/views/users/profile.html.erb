@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-md-6 col-md-offset-3">
+      <a href="/logout" class="btn btn-default pull-right" style="margin: 35px 20px 0 0 ;">Logout</a>
+      <a href="/bright_ideas" class="btn btn-default pull-right" style="margin: 35px 5px 0 0 ;">Back to Ideas</a>
+      <h3 class="well">User Information</h3>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 0px;">
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Name: <%= @user.first_name + " " +  @user.last_name %></h2>
+      <h3>Alias: <%= @user.alias %></h3>
+      <h3>Email: <%= @user.email %></h3>
+      <hr>
+      <!-- make this dynamic -->
+      <h4>Total Number of Posts: <%= @total_posts.count %></h4>
+      <h4>Total Number of Likes: <%= @total_likes.count %></h4>
+    </div>
+  </div>
+</div>
